@@ -1,0 +1,113 @@
+---
+import { Icon } from 'astro-icon/components'
+import { t } from 'i18n:astro'
+import Button from '@components/Button.astro'
+
+const { cta } = t('hero', {
+  returnObjects: true
+})
+const { title, subtitle } = t('contact', {
+  returnObjects: true
+})
+---
+
+<section class="contact">
+  <h2 class="headline-1">{title}</h2>
+  <h3 class="headline-2">{subtitle}</h3>
+  <div class="buttons-container">
+    <Button class="filled contact-trigger" href="#">{cta}</Button>
+    <Button href="https://www.linkedin.com/in/zack-zikry-33aa29151/" target="_blank" rel="noopener">
+      <Icon name="linkedin" size={24} />
+      <span>LinkedIn</span>
+    </Button>
+  </div>
+  <canvas id="grid"></canvas>
+</section>
+
+<style>
+  .contact {
+    padding-block: var(--spacing-3xl);
+    padding-inline: 1rem;
+    text-align: center;
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-card);
+    box-shadow: var(--shadow-sm);
+
+    @media (width >= 768px) {
+      padding-inline: 0;
+    }
+
+    & h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: var(--accent-primary);
+      text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+      margin-bottom: var(--spacing-md);
+    }
+
+    & h3 {
+      font-weight: initial;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    & .buttons-container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-xl);
+
+      @media (width >= 768px) {
+        flex-direction: row;
+      }
+    }
+
+    & canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+  }
+</style>
+
+<script>
+  import { GridField } from '@scripts/gridfield'
+
+  const canvas = document.querySelector('#grid') as HTMLCanvasElement
+
+  if (canvas) {
+    const gridField = new GridField(canvas)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Inicia la animación cuando el canvas entra en la vista
+            gridField.play()
+            // Deja de observar el canvas
+            observer.unobserve(canvas)
+          }
+        })
+      },
+      {
+        // Activar cuando al menos el 50% del canvas sea visible
+        threshold: 0.5
+      }
+    )
+
+    // Observa el canvas
+    observer.observe(canvas)
+  } else {
+    // Mensaje de error si no se encuentra el canvas
+    console.error("No se encontró el elemento 'canvas'")
+  }
+</script>

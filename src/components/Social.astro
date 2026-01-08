@@ -1,0 +1,61 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<aside class="socials">
+  <nav>
+    <a href="https://github.com/Zackkkkun" target="_blank" rel="noopener" aria-label="GitHub">
+      <Icon name="github" size={28} />
+    </a>
+    <a href="https://www.linkedin.com/in/zack-zikry-33aa29151/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <Icon name="linkedin" size={28} />
+    </a>
+    <a href="mailto:wmzazzikry1994@gmail.com" aria-label="Mail">
+      <Icon name="mail" size={28} />
+    </a>
+  </nav>
+</aside>
+
+<style>
+  .socials {
+    display: none;
+
+    @media (width >= 1200px) {
+      display: initial;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      translate: 46px;
+
+      & nav {
+        display: flex;
+        gap: 24px;
+        flex-direction: column;
+
+        &::after {
+          content: '';
+          background-color: var(--border-secondary);
+          width: 1px;
+          height: 127px;
+          margin-inline: auto;
+          box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+        }
+
+        & a {
+          color: var(--text-primary);
+          text-decoration: none;
+          transition: all var(--transition-fast);
+          padding: var(--spacing-sm);
+          border-radius: var(--radius-md);
+
+          &:hover {
+            color: var(--accent-primary);
+            background: var(--bg-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+          }
+        }
+      }
+    }
+  }
+</style>

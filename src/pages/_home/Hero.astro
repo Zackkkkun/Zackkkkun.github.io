@@ -1,0 +1,165 @@
+---
+import { Icon } from 'astro-icon/components'
+import { t } from 'i18n:astro'
+
+const {
+  job_availability: jobAvailability,
+  title,
+  job_title: jobTitle,
+  description,
+  cta
+} = t('hero', {
+  returnObjects: true
+})
+---
+
+<section class="hero section">
+  <div class="container">
+    <div class="hero-content animate-fade-in-up">
+      <div class="badge animate-fade-in-up animate-stagger-1">
+        <span class="dot"></span>
+        <span>{jobAvailability}</span>
+      </div>
+      <h1 class="animate-fade-in-up animate-stagger-2">{title}</h1>
+      <section class="hero-text animate-fade-in-up animate-stagger-3">
+        <p set:html={jobTitle} />
+        <p>{description}</p>
+      </section>
+      <section class="button-container animate-fade-in-up animate-stagger-4">
+        <a class="btn btn-primary" href="#contact">
+          <Icon name="mail" size={20} />
+          <span>{cta}</span>
+        </a>
+        <a class="btn btn-secondary" href="https://www.linkedin.com/in/zack-zikry-33aa29151/" target="_blank" rel="noopener">
+          <Icon name="linkedin" size={20} />
+          <span>LinkedIn</span>
+        </a>
+      </section>
+    </div>
+    <canvas id="stars"></canvas>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--accent-primary);
+    margin-bottom: var(--spacing-lg);
+    opacity: 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent-primary);
+    animation: pulse 2s infinite;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-lg);
+    opacity: 0;
+    text-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+
+    @media (width >= 768px) {
+      font-size: 4rem;
+    }
+  }
+
+  .hero-text {
+    margin-bottom: var(--spacing-2xl);
+    opacity: 0;
+
+    p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-md);
+      line-height: 1.6;
+
+      @media (width >= 768px) {
+        font-size: 1.5rem;
+      }
+
+      strong {
+        color: var(--accent-primary);
+        font-weight: 600;
+      }
+    }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    opacity: 0;
+
+    @media (width >= 768px) {
+      flex-direction: row;
+    }
+  }
+
+  #stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.4);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(0, 255, 102, 0);
+      transform: scale(1.2);
+    }
+  }
+</style>
+
+<script>
+  import { StarField } from '@scripts/starfield'
+
+  const canvas = document.querySelector('#stars') as HTMLCanvasElement
+  new StarField(canvas)
+</script>

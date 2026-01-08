@@ -1,0 +1,94 @@
+{
+  "title": "Computer Science Student - Wan Mohammad Zaman Az Zikry",
+  "description": "Computer Science student from Melaka, Malaysia. Passionate about programming and finding creative solutions using technologies like C++, HTML, Node.js, JSON, Kotlin, and WordPress.",
+  "navbar": [
+    {
+      "label": "Home",
+      "href": "#top"
+    },
+    {
+      "label": "Education",
+      "href": "#education"
+    },
+    {
+      "label": "Projects",
+      "href": "#projects"
+    },
+    {
+      "label": "Technical Skills",
+      "href": "#technical-skills"
+    },
+    {
+      "label": "About me",
+      "href": "#about-me"
+    }
+  ],
+  "hero": {
+    "job_availability": "Open to opportunities!",
+    "title": "Hello I'm Wan Mohammad Zaman Az Zikry!",
+    "job_title": "<strong>Computer Science Student</strong> from Melaka, Malaysia.",
+    "description": "I love studying programming and am a creative person who enjoys finding innovative solutions. I've studied C++, HTML, Node.js, JSON, Kotlin, and WordPress.",
+    "cta": "Contact me"
+  },
+  "experience": {
+    "title": "Education",
+    "timeline": [
+      {
+        "institution": "Universiti Teknikal Malaysia Melaka",
+        "period": "2023 - Present",
+        "degree": "Bachelor in Computer Science (Software Development)",
+        "description": "Currently pursuing a Bachelor's degree in Computer Science with a focus on software development.",
+        "highlights": ["Studying programming languages and technologies", "Developing software development skills"]
+      },
+      {
+        "institution": "Kolej Matrikulasi Melaka",
+        "period": "2022 - 2023",
+        "degree": "Pre-University Program",
+        "description": "Completed pre-university matriculation program preparing for university studies.",
+        "highlights": ["Foundation studies", "Academic preparation"]
+      },
+      {
+        "institution": "Kolej PERMATA Insan",
+        "period": "2020 - 2022",
+        "degree": "Secondary Education",
+        "description": "Completed secondary education with focus on building academic foundation.",
+        "highlights": ["Secondary education", "Academic foundation"]
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "projects": [
+      {
+        "title": "Gym Coaching System",
+        "description": "Gym Coaching System aims to streamline the training process, enhance trainee engagement, and improve overall fitness outcomes.",
+        "image": "/src/images/projects/gymcoaching.jpg",
+        "code": "Code",
+        "preview": "Preview"
+      },
+      {
+        "title": "Vendor Contact Management System",
+        "description": "A transparent and connected pineapple marketplace that empowers farmers, vendors, and buyers with real-time information for fair and sustainable trade.",
+        "image": "/src/images/projects/sulam.jpeg",
+        "code": "Code",
+        "preview": "Preview"
+      },
+      {
+        "title": "TripSync - Travel Planner App",
+        "description": "TripSync solves the problems faced by both travelers and tourism managers in Malaysia. It offers personalized travel recommendations, seamless itinerary planning, and real-time updates to enhance the travel experience while providing tourism managers with valuable insights to improve their services.",
+        "image": "/src/images/projects/tripsync.jpeg",
+        "code": "Code",
+        "preview": "Preview"
+      }
+    ]
+  },
+  "about": {
+    "title": "About me",
+    "subtitle": "Passionate about coding and creative solutions",
+    "description": "I am a Computer Science student from Melaka, Malaysia, with a deep passion for programming. As a creative individual, I love finding innovative solutions to problems. I've studied various technologies including C++, HTML, Node.js, JSON, Kotlin, and WordPress. Coding is not just a skill for me—it's my passion that drives me to continuously learn and grow."
+  },
+  "contact": {
+    "title": "Let's connect!",
+    "subtitle": "I'm open to opportunities and collaborations"
+  }
+}

@@ -1,0 +1,266 @@
+---
+const technicalSkills = [
+  { name: 'Android Studio', percentage: 70 },
+  { name: 'WordPress', percentage: 80 },
+  { name: 'Flutter', percentage: 60 },
+  { name: 'HTML', percentage: 70 },
+  { name: 'Python', percentage: 60 },
+  { name: 'Java', percentage: 70 },
+  { name: 'Figma', percentage: 30 }
+]
+---
+
+<section id="technical-skills" class="section technical-skills-section">
+  <div class="container">
+    <h2 class="section-title animate-fade-in-up">TECHNICAL SKILLS</h2>
+    <p class="section-subtitle animate-fade-in-up animate-stagger-1">SYSTEM PROFICIENCY LEVELS</p>
+
+    <div class="skills-grid">
+      {technicalSkills.map((skill, index) => (
+        <div class={`skill-circle-container animate-fade-in-up animate-stagger-${(index % 6) + 2}`}>
+          <div class="skill-circle" style={`--percentage: ${skill.percentage}`}>
+            <div class="circle-progress">
+              <div class="circle-inner">
+                <span class="skill-percentage">{skill.percentage}%</span>
+                <span class="skill-name">{skill.name}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .technical-skills-section {
+    width: 100%;
+    background: var(--bg-primary);
+    padding: var(--spacing-3xl) var(--spacing-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .technical-skills-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(0, 255, 102, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(0, 255, 102, 0.03) 0%, transparent 50%);
+    opacity: 0.3;
+  }
+
+  .technical-skills-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      linear-gradient(rgba(0, 255, 102, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 102, 0.02) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+  }
+
+  .container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--accent-primary);
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+    text-shadow: 0 0 20px rgba(0, 255, 102, 0.5);
+    letter-spacing: 3px;
+  }
+
+  .section-subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--accent-primary);
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+    opacity: 0.8;
+    letter-spacing: 2px;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-2xl);
+    max-width: 1000px;
+    margin: 0 auto;
+    justify-items: center;
+  }
+
+  .skill-circle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+  }
+
+  .skill-circle {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    cursor: pointer;
+  }
+
+  .circle-progress {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(
+      var(--accent-primary) calc(var(--percentage) * 3.6deg),
+      var(--bg-tertiary) calc(var(--percentage) * 3.6deg)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 0 20px rgba(0, 255, 102, 0.3),
+      inset 0 0 20px rgba(0, 255, 102, 0.1);
+    transition: all var(--transition-normal);
+    animation: fillCircle 2s ease-out forwards;
+  }
+
+  .circle-progress::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    background: var(--bg-secondary);
+    border-radius: 50%;
+    box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.2);
+  }
+
+  .circle-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--spacing-sm);
+  }
+
+  .skill-percentage {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-primary);
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
+    margin-bottom: 2px;
+    transition: all var(--transition-fast);
+  }
+
+  .skill-name {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    transition: all var(--transition-fast);
+  }
+
+  .skill-circle:hover .circle-progress {
+    transform: scale(1.05);
+    box-shadow:
+      0 0 30px rgba(0, 255, 102, 0.5),
+      inset 0 0 30px rgba(0, 255, 102, 0.2);
+  }
+
+  .skill-circle:hover .skill-percentage {
+    text-shadow: 0 0 15px rgba(0, 255, 102, 1);
+    transform: scale(1.1);
+  }
+
+  .skill-circle:hover .skill-name {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  @keyframes fillCircle {
+    0% {
+      background: conic-gradient(
+        var(--accent-primary) 0deg,
+        var(--bg-tertiary) 0deg
+      );
+    }
+    100% {
+      background: conic-gradient(
+        var(--accent-primary) calc(var(--percentage) * 3.6deg),
+        var(--bg-tertiary) calc(var(--percentage) * 3.6deg)
+      );
+    }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+      letter-spacing: 2px;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: var(--spacing-lg);
+    }
+
+    .skill-circle {
+      width: 110px;
+      height: 110px;
+    }
+
+    .skill-percentage {
+      font-size: 1.2rem;
+    }
+
+    .skill-name {
+      font-size: 0.7rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+    }
+
+    .skill-circle {
+      width: 90px;
+      height: 90px;
+    }
+
+    .skill-percentage {
+      font-size: 1rem;
+    }
+
+    .skill-name {
+      font-size: 0.65rem;
+    }
+  }
+</style>

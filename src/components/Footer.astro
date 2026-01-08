@@ -1,0 +1,54 @@
+   ---
+const year = new Date().getFullYear()
+---
+
+<footer>
+  <p>
+    © <span id="year">{year}</span> Wan Mohammad Zaman Az Zikry bin Zainuddin. All rights reserved.
+  </p>
+  </p>
+</footer>
+
+<style>
+  footer {
+    padding-block: 67px;
+    text-align: center;
+    padding-inline: var(--mobile-inline-padding);
+
+    @media (width >= 768px) {
+      padding-inline: 0;
+    }
+
+    & p span video {
+      display: inline-block;
+      margin-inline: 4px;
+    }
+
+    & P > span:first-child::after {
+      content: '|';
+      display: inline-block;
+      translate: 0 -1px;
+      margin-right: 4px;
+    }
+
+    & a {
+      color: var(--text-color);
+      text-decoration: none;
+      transition: var(--transition-text);
+
+      @media (any-hover: hover) {
+        &:hover {
+          color: var(--text-description-color);
+        }
+      }
+    }
+
+    & video {
+      translate: 0 -2px;
+    }
+  }
+</style>
+
+<script is:inline>
+  document.querySelector('#year').textContent = new Date().getFullYear()
+</script>

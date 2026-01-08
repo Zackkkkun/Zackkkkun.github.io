@@ -1,0 +1,44 @@
+---
+import { t } from 'i18n:astro'
+import { URL } from '@data/constants'
+import Layout from '@layouts/Layout.astro'
+import About from '@pages/_home/About.astro'
+import Contact from '@pages/_home/Contact.astro'
+import Experience from '@pages/_home/Experience.astro'
+import Hero from '@pages/_home/Hero.astro'
+import Projects from '@pages/_home/Projects.astro'
+import TechnicalSkills from '@pages/_home/TechnicalSkills.astro'
+import ContactModal from '@components/ContactModal.astro'
+import OpenGraph from '@components/OpenGraph.astro'
+
+const options = {
+  title: t('common:title'),
+  description: t('common:description')
+}
+---
+
+<Layout options={options}>
+  <OpenGraph information={options} image=`${URL}/og/unicorn-sparkle-og.png` />
+
+  <main>
+    <Hero />
+    <Experience />
+    <Projects />
+    <TechnicalSkills />
+    <About />
+    <Contact />
+  </main>
+  <ContactModal />
+</Layout>
+
+<style>
+  main {
+    max-width: 1054px;
+    margin-inline: auto;
+    padding-inline: var(--mobile-inline-padding);
+
+    @media (width >= 1200px) {
+      padding-inline: 0;
+    }
+  }
+</style>

@@ -1,0 +1,55 @@
+---
+interface Props {
+  href: string
+  class?: string
+  target?: string
+  rel?: string
+}
+
+const { href, class: className, target, rel } = Astro.props
+---
+
+<a class={className} href={href} target={target} rel={rel}>
+  <slot />
+</a>
+
+<style>
+  a {
+    display: inline-flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+    transition: all var(--transition-fast);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow-sm);
+
+    &:hover {
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+      transform: translateY(-2px);
+    }
+
+    &.filled {
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+
+      &:hover {
+        background: var(--accent-secondary);
+        color: var(--bg-primary);
+        box-shadow: 0 0 20px rgba(0, 204, 85, 0.5);
+        transform: translateY(-2px);
+      }
+    }
+  }
+</style>

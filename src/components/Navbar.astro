@@ -1,0 +1,327 @@
+---
+import { Icon } from 'astro-icon/components'
+import { t } from 'i18n:astro'
+
+// Get navigation links
+const links = t('navbar', { returnObjects: true })
+---
+
+<nav id="menu">
+  <ul>
+    {
+      links.map(({ label, href }, index) => (
+        <li>
+          <a class:list={{ active: index === 0 }} href={href}>
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <button id="menu-button">
+    <Icon name="menu" size={36} />
+  </button>
+</nav>
+
+<dialog>
+  <nav>
+    {links.map(({ label, href }) => <a href={href}>{label}</a>)}
+  </nav>
+  <button id="close" aria-label="Close">
+    <Icon name="close" size={28} />
+  </button>
+</dialog>
+
+<!-- Set the site to always use dark mode -->
+<script is:inline>
+  document.documentElement.classList.add('dark')
+  localStorage.setItem('dark-theme', 'true')
+</script>
+
+<style>
+  nav#menu {
+    background-color: color-mix(in srgb, var(--bg-color), transparent 30%);
+    backdrop-filter: blur(12px);
+    padding-block: 1rem;
+    padding-inline: var(--mobile-inline-padding);
+    text-align: right;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    @media (width >= 768px) {
+      background: none;
+      backdrop-filter: none;
+      padding: 0;
+      top: 36px;
+      text-align: initial;
+    }
+
+    & ul {
+      display: none;
+
+      @media (width >= 768px) {
+        --gap: 35px;
+
+        background-color: color-mix(in srgb, var(--bg-color), transparent 30%);
+        backdrop-filter: blur(12px);
+        display: flex;
+        align-items: center;
+        gap: var(--gap);
+        margin: 36px auto 0;
+        width: fit-content;
+        border: 1px solid var(--border-color);
+        padding: 16px 24px;
+        border-radius: 1000px;
+        transition: var(--transition-border);
+
+        & li {
+          position: relative;
+
+          /* Agrega el separador entre elementos excepto al último hijo */
+          &:not(:last-child)::after {
+            --size: 3px;
+
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: var(--size);
+            height: var(--size);
+            translate: calc(var(--gap) / 2) -50%;
+            background-color: var(--bg-separator);
+            border-radius: 50%;
+            transition: var(--transition-bg);
+          }
+
+          & .language {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            & span:first-child {
+              line-height: 0;
+            }
+          }
+        }
+
+        & a {
+          /* With the color-mix function, change the link color by applying 40% of the background color */
+          --hover-color: color-mix(
+            in srgb,
+            var(--text-color),
+            var(--bg-color) 40%
+          );
+
+          color: var(--text-color);
+          text-decoration: none;
+          transition: var(--transition-text);
+
+          &.active {
+            color: var(--hover-color);
+          }
+
+          &:active,
+          &:focus {
+            color: var(--hover-color);
+          }
+
+          /* The media query (any-hover: hover) is used to apply a hover effect to the link */
+          @media (any-hover: hover) {
+            &:hover {
+              color: var(--hover-color);
+            }
+          }
+        }
+      }
+    }
+
+    & button {
+      /* With the color-mix function, change the link color by applying 40% of the background color */
+      --hover-color: color-mix(in srgb, var(--text-color), var(--bg-color) 40%);
+
+      background: transparent;
+      color: var(--text-color);
+      border: none;
+      padding: 0;
+      transform: var(--transition-text);
+
+      &:active {
+        color: var(--hover-color);
+      }
+
+      @media (any-hover: hover) {
+        &:hover {
+          color: var(--hover-color);
+        }
+      }
+
+      @media (width >= 768px) {
+        display: none;
+      }
+    }
+  }
+
+  dialog {
+    position: fixed;
+    background-color: var(--bg-secondary-color);
+    border-radius: var(--radius);
+    width: 70vw;
+    border: 1px solid var(--border-color);
+    transition:
+      opacity 300ms ease,
+      transform 300ms ease,
+      overlay 500ms ease allow-discrete,
+      display 300ms ease allow-discrete;
+    opacity: 0;
+    transform: translateY(1em);
+    backdrop-filter: blur(0px);
+
+    &::backdrop {
+      background-color: hsl(0 0 0 / 0);
+      backdrop-filter: blur(4px);
+      transition:
+        display 300ms allow-discrete,
+        overlay 500ms allow-discrete,
+        background-color 300ms;
+    }
+
+    &[open]::backdrop {
+      background-color: hsl(0 0 0 / 50%);
+    }
+
+    &[open] {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @starting-style {
+      &[open] {
+        opacity: 0;
+        transform: translateY(-1em);
+      }
+
+      &[open]::backdrop {
+        background-color: hsl(0 0 0 / 0);
+      }
+    }
+
+    & nav {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 24px;
+      text-align: center;
+      color: var(--text-color);
+
+      & a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: var(--transition-text);
+
+        &:hover {
+          color: var(--text-description-color);
+        }
+      }
+    }
+
+    & #close {
+      --position: 8px;
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: transparent;
+      color: var(--text-color);
+      border: none;
+      translate: calc(var(--position) * -1) var(--position);
+
+      &:active {
+        color: var(--text-description-color);
+      }
+    }
+  }
+
+  body.no-scroll {
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  const menuButton = document.querySelector('#menu-button')
+  const menuDialog = document.querySelector('dialog')
+  const closeButton = document.querySelector('#close')
+  const links = document.querySelectorAll('dialog a')
+
+  menuButton?.addEventListener('click', () => {
+    document.body.classList.add('no-scroll')
+    menuDialog?.showModal()
+  })
+
+  closeButton?.addEventListener('click', () => {
+    document.body.classList.remove('no-scroll')
+    menuDialog?.close()
+  })
+
+  links.forEach((link) => {
+    link.addEventListener('click', () => {
+      document.body.classList.remove('no-scroll')
+      menuDialog?.close()
+    })
+  })
+</script>
+
+<script>
+  const mainSections = document.querySelectorAll('section[id]')
+  const navbarLinks = document.querySelectorAll(
+    '#menu a'
+  ) as NodeListOf<HTMLAnchorElement>
+
+  const handleActiveLink = (sectionId: string | null) => {
+    navbarLinks.forEach((link) => {
+      if (sectionId && link.href.includes(`#${sectionId}`)) {
+        link.classList.add('active')
+      } else if (!sectionId && link.href.includes('#top')) {
+        // Activate the #top link when we are at the top
+        link.classList.add('active')
+      } else {
+        link.classList.remove('active')
+      }
+    })
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      let visibleSectionId = null
+      let isAnySectionVisible = false
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          isAnySectionVisible = true // At least one section is visible
+          visibleSectionId = entry.target.id // Store the visible section id
+        }
+      })
+
+      // If no section is visible and we're at the top of the page
+      if (!isAnySectionVisible && window.scrollY === 0) {
+        handleActiveLink(null) // Activate the #top link
+      } else if (isAnySectionVisible) {
+        handleActiveLink(visibleSectionId) // Activate the visible section
+      }
+    },
+    {
+      threshold: 0.1, // Detect when the section is at least 10% visible
+      rootMargin: '0px 0px -40% 0px' // Adjust margin to detect visibility
+    }
+  )
+
+  // Observe each section
+  mainSections.forEach((section) => observer.observe(section))
+
+  // Add a check for when the user returns to the beginning
+  window.addEventListener('scroll', () => {
+    if (window.scrollY === 0) {
+      handleActiveLink(null) // Activate #top when the scroll is at the top
+    }
+  })
+</script>
